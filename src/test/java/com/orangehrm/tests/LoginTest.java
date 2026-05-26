@@ -12,11 +12,10 @@ public class LoginTest extends BaseTest {
     @Test
     public void validLoginTest() throws InterruptedException
     {
-        Thread.sleep(3000);
 
         LoginPage login = new LoginPage(driver);
 
-        login.loginToApplication("Admin", "admin123");
+        login.loginToApplication("BansariPA", "Bansari@123");
 
         Thread.sleep(3000);
 
@@ -26,15 +25,12 @@ public class LoginTest extends BaseTest {
     }
 
      @Test
-    public void invalidPasswordTest() throws InterruptedException {
-
-        Thread.sleep(3000);
+    public void invalidPasswordTest() throws InterruptedException 
+    {
 
         LoginPage login = new LoginPage(driver);
 
-        login.loginToApplication("Admin", "wrong123");
-
-        Thread.sleep(3000);
+        login.loginToApplication("BansariPA", "Bansari@123");
 
         Assert.assertTrue(driver.getCurrentUrl().contains("auth"));
 
@@ -42,15 +38,12 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
-    public void emptyUsernameTest() throws InterruptedException {
-
-        Thread.sleep(3000);
+    public void emptyUsernameTest() throws InterruptedException 
+    {
 
         LoginPage login = new LoginPage(driver);
 
-        login.loginToApplication("", "admin123");
-
-        Thread.sleep(3000);
+        login.loginToApplication("", "Bansari@123");
 
         Assert.assertTrue(driver.getCurrentUrl().contains("auth"));
 

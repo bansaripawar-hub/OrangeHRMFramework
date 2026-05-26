@@ -4,7 +4,6 @@ import java.time.Duration;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -27,13 +26,14 @@ public class LoginPage
      public void loginToApplication(String user, String pass) 
      {
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-        WebElement usernameField = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(username));
+    wait.until(ExpectedConditions.visibilityOfElementLocated(username));
 
-        usernameField.sendKeys(user);
+        driver.findElement(username).clear();
+        driver.findElement(username).sendKeys(user);
 
+        driver.findElement(password).clear();
         driver.findElement(password).sendKeys(pass);
 
         driver.findElement(loginButton).click();
