@@ -4,6 +4,7 @@ import java.time.Duration;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -23,19 +24,28 @@ public class LoginPage
 
     By loginButton = By.xpath("//button[@type='submit']");
 
-     public void loginToApplication(String user, String pass) 
+     public void loginToApplication(String user, String pass) throws InterruptedException 
      {
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
-    wait.until(ExpectedConditions.visibilityOfElementLocated(username));
+        WebElement usernameField =
+            wait.until(ExpectedConditions.elementToBeClickable(username));
 
-        driver.findElement(username).clear();
-        driver.findElement(username).sendKeys(user);
+        usernameField.clear();
+        usernameField.sendKeys(user);
 
-        driver.findElement(password).clear();
-        driver.findElement(password).sendKeys(pass);
+        WebElement passwordField =
+            wait.until(ExpectedConditions.elementToBeClickable(password));
 
-        driver.findElement(loginButton).click();
-     }
+        passwordField.clear();
+        passwordField.sendKeys(pass);
+
+        WebElement loginBtn =
+            wait.until(ExpectedConditions.elementToBeClickable(loginButton));
+
+    Thread.sleep(2000);
+
+    loginBtn.click();
+}
 }
